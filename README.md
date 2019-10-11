@@ -43,8 +43,9 @@ Add the nouveau.modeset=0 parameter to the end of the linux line ... Then press 
 3. Enter username + password   
 4. Uninstall every NVIDIA related software:   
 ```bash    
-sudo apt-get purge nvidia*  
-sudo reboot   
+sudo apt-get --purge -y remove 'cuda*'
+sudo apt-get --purge -y remove 'nvidia*'
+sudo reboot  
 ```   
 
 ---   
