@@ -1,14 +1,14 @@
-# Tensorflow GPU install on ubuntu 16.04    
+# Tensorflow GPU install on ubuntu 18.04    
 
 These instructions are intended to set up a deep learning environment for GPU-powered tensorflow.      
 [See here for pytorch GPU install instructions](https://github.com/williamFalcon/pytorch-gpu-install)
 
 After following these instructions you'll have:
 
-1. Ubuntu 16.04. 
-2. Cuda 9.0 drivers installed.
+1. Ubuntu 18.04. 
+2. Cuda 10.0 drivers installed.
 3. A conda environment with python 3.6.    
-4. The latest tensorflow version with gpu support.   
+4. The latest tensorflow version with gpu support (2.0).   
 
 ---   
 ### Step 0: Noveau drivers     
@@ -65,17 +65,17 @@ sudo apt-get install openjdk-8-jdk git python-dev python3-dev python-numpy pytho
 ``` bash
 # The 16.04 installer works with 16.10.
 # download drivers
-curl -O http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_9.0.176-1_amd64.deb
+curl -O http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-repo-ubuntu1804_10.0.130-1_amd64.deb
 
 # download key to allow installation
-sudo apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub
+sudo apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
 
 # install actual package
-sudo dpkg -i ./cuda-repo-ubuntu1604_9.0.176-1_amd64.deb
+sudo dpkg -i ./cuda-repo-ubuntu1804_10.0.130-1_amd64.deb
 
 #  install cuda (but it'll prompt to install other deps, so we try to install twice with a dep update in between
 sudo apt-get update
-sudo apt-get install cuda-9-0   
+sudo apt-get install cuda-10-0   
 ```    
 
 2a. reboot Ubuntu
@@ -93,8 +93,8 @@ nvidia-smi
 
 3. Install cudnn   
 ``` bash
-wget https://s3.amazonaws.com/open-source-william-falcon/cudnn-9.0-linux-x64-v7.1.tgz  
-sudo tar -xzvf cudnn-9.0-linux-x64-v7.1.tgz  
+wget https://s3.amazonaws.com/open-source-william-falcon/cudnn-10.0-linux-x64-v7.6.4.38.tgz  
+sudo tar -xzvf cudnn-10.0-linux-x64-v7.6.4.38.tgz  
 sudo cp cuda/include/cudnn.h /usr/local/cuda/include
 sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
 sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*
@@ -138,14 +138,14 @@ source ~/.bashrc
 
 6. Create conda env to install tf   
 ``` bash
-conda create -n tensorflow
+conda create -n tf
 
 # press y a few times 
 ```   
 
 7. Activate env   
 ``` bash
-source activate tensorflow   
+source activate tf   
 ```
 
 8. Install tensorflow with GPU support for python 3.6    
@@ -153,7 +153,7 @@ source activate tensorflow
 pip install tensorflow-gpu
 
 # If the above fails, try the part below
-# pip install --ignore-installed --upgrade https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-1.2.0-cp36-cp36m-linux_x86_64.whl
+# pip install --ignore-installed --upgrade https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-2.0.0-cp36-cp36m-linux_x86_64.whl
 ```   
 
 9. Test tf install   
